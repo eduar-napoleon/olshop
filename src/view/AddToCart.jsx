@@ -7,6 +7,7 @@ import plus from "../assets/svg/plus.svg";
 import minus from "../assets/svg/minus.svg";
 import trash2 from "../assets/svg/trash2.svg";
 import right from "../assets/svg/right.svg";
+import { Link } from "react-router-dom";
 function AddToCart() {
   const [count, setCount] = useState(0);
   const data = [
@@ -25,7 +26,9 @@ function AddToCart() {
     <div className="container bg-emc-white">
       <section>
         <div className="flex flex-row justify-between my-3">
-          <img src={back} alt="" />
+          <Link to="/product-detail">
+            <img src={back} alt="" />
+          </Link>
           <p className="font-bold text-sm mt-1">Shopping Cart</p>
           <img src={trash} alt="" />
         </div>
