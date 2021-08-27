@@ -3,7 +3,11 @@ module.exports = {
   purge: ["./src/**/*.html", "./src/**/*.js"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'hero-lg': "url('/src/assets/svg/background.svg')",
+      }
+    },
     colors: {
       emc: {
         black: "#212429",
