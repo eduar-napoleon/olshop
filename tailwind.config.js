@@ -11,6 +11,7 @@ module.exports = {
         brokenWhite: "#F6F6F6",
         green: "#23E09C",
         gray: "#7F7F7F"
+        
        
       },
     },

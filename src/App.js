@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import "tailwindcss/tailwind.css"
 import Router from "../src/router/index"
 
