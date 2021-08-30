@@ -4,15 +4,30 @@ import logo from "../assets/svg/logo.svg";
 import right from "../assets/svg/arrow right.svg";
 import wire from "../assets/svg/wire.svg";
 import picture from "../assets/svg/picture.svg";
-import search from "../assets/svg/search.svg"
+import search from "../assets/svg/search.svg";
 import Earphone from "../assets/svg/headset.svg";
 
-
-
 function Home() {
+  const data = [
+    {
+      img: Earphone,
+      title: "TMA-2 HD Wireless",
+      price: "USD 350",
+    },
+    {
+      img: wire,
+      title: "C02 - Cable",
+      price: "USD 25",
+    },
+    {
+      img: wire,
+      title: "C02 - Cable",
+      price: "USD 25",
+    },
+  ];
   return (
     <div className="container mx-auto">
-      <nav className="flex items- center justify-between mt-2">
+      <nav className="flex items- center justify-between my-3 container">
         <img src={menu} alt="" />
         <div className="flex items-center">
           <img className="bg-emc-green ml-2" src={logo} alt="" />
@@ -20,8 +35,8 @@ function Home() {
         </div>
         <img src={picture} alt="" />
       </nav>
-      <section className="mt-5">
-        <h5>Hi,Andrea</h5>
+      <section className="mt-5 container">
+        <h5>Hi, Andrea</h5>
         <p className="font-bold text-2xl mt-1">
           What are you looking for today?
         </p>
@@ -35,7 +50,7 @@ function Home() {
         </div>
       </section>
       <section>
-        <div className="bg-emc-brokenWhite rounded-lg mt-5 ">
+        <div className="bg-emc-brokenWhite rounded-t-explore mt-5">
           <div className="mt-5 ml-2">
             <button className="bg-emc-green  mt-3 rounded-xl text-center w-2/6  h- py-1 text-white font-bold">
               Headphone
@@ -47,56 +62,43 @@ function Home() {
               Earpads
             </button>
           </div>
-          <div className="mx-auto flex-wrap bg-emc-white rounded-lg mt-3">
-            <div className="flex ">
-              <p className="text-5xl font-bold flex flex-col mt-4 mb-4">
+          <div className="mx-3 flex-wrap bg-emc-white rounded-lg mt-3">
+            <div className="flex flex-row mx-5">
+              <p className="text-3xl font-bold flex flex-col mt-4 mb-4">
                 TMA-2 Modular Headphone{" "}
               </p>
               <img src={Earphone} alt="" />
             </div>
-            <div className="flex items-center ">
+            <div className="flex items-center mx-3">
               <a href="" className="text-emc-green ml-4 mb-2 ">
                 Shop Now
               </a>
               <img clasName="ml-4 mb-3" src={right} alt="" />
             </div>
           </div>
-          <div className="flex justify-between mt-4 my-3">
-            <p className="ml-3">Feature Product</p>
-            <p className="text-emc-gray mr-3">See All</p>
-          </div>
-          <div className="flex justify-center">
-            <div className="flex-row flex-wrap bg-emc-white rounded-lg  gap-x-5 py-3 px-3 my-5 ml-3">
-              <img src={Earphone} alt="" />
-              <div>
-                <p>TMA-2 HD Wireless</p>
-                <span>Usd 350</span>
+          <section className="mx-3">
+            <div className="flex flex-col">
+              <div className="flex justify-between mt-4 my-3">
+                <p className="ml-3">Feature Product</p>
+                <p className="text-emc-gray mr-3">See All</p>
               </div>
-            </div>
-            <div className="flex-row flex-wrap bg-emc-white rounded-lg gap-x-5 py-3 px-3 my-5 ml-3 items-center">
-              <img src={wire} alt="" />
-              <div className="mt-1">
-                <p>C0-2 Cable</p>
-                <span>Usd 25</span>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/* <div className="flex" >
-            <img src={Earphone} alt="" />
-            <div className="flex-row flex-wrap bg-emc-white rounded-lg">
-            <p>TMA-2 HD Wireless</p>
-                <span>Usd 350</span>
+              <div className="flex justify-center flex-row gap-x-3 relative overflow-auto">
+                {data.map((col, idx) => {
+                  return (
+                    <div className="flex flex-col bg-emc-white container my-3 w-full rounded-xl">
+                      <img src={col.img} alt="" className="py-2 w-full"/>
+                      <div className="mt-1">
+                        <p>{col.title}</p>
+                        <span>{col.price}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <div className="flex-row flex-wrap bg-emc-white rounded-lg">
-                <img src={Wire} alt="" />
-                <div>
-                <p>C0-2 Cable</p>
-                <span>Usd 25</span>
-                </div>
-                </div>
-            </div> */}
+          </section>
+        </div>
       </section>
     </div>
   );

@@ -5,8 +5,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'hero-lg': "url('/src/assets/svg/background.svg')",
-      }
+        "hero-lg": "url('/src/assets/svg/background.svg')",
+      },
     },
     colors: {
       emc: {
@@ -15,8 +15,8 @@ module.exports = {
         brokenWhite: "#F6F6F6",
         green: "#23E09C",
         gray: "#7F7F7F",
-        background: "#E5E5E5"
-       
+        background: "#E5E5E5",
+        lightGray: "#BABABA",
       },
     },
 
@@ -27,6 +27,10 @@ module.exports = {
       desktop: { min: "1280px", max: "1535px" },
       desktopxl: { min: "1536px" },
     },
+    borderRadius: {
+      "explore": "30px",
+      "xl": "0.75rem"
+    }
   },
   variants: {
     extend: {},

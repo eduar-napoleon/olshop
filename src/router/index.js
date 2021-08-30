@@ -8,6 +8,7 @@ import Register from "../view/Register";
 import ExploreProduct from "../view/ExploreProduct";
 import Home from "../view/Home";
 import Search from "../view/Search";
+import ModalFilter from "../components/modal/ModalFilter";
 
 function index() {
   return (
@@ -61,6 +62,12 @@ function index() {
             exact={true}
             path={`/search`}
             render={(props) => <Search {...props} />}
+          />
+          <Route
+            key={1}
+            exact={true}
+            path={`/test`}
+            render={(props) => <ModalFilter {...props} />}
           />
         </Switch>
       </Router>
