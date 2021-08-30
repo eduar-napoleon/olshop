@@ -5,6 +5,9 @@ import AddToCart from "../view/AddToCart";
 import Profile from "../view/Profile";
 import Login from "../view/Login";
 import Register from "../view/Register";
+import ExploreProduct from "../view/ExploreProduct";
+import Home from "../view/Home";
+import Search from "../view/Search";
 
 function index() {
   return (
@@ -40,6 +43,24 @@ function index() {
             exact={true}
             path={`/register`}
             render={(props) => <Register {...props} />}
+          />
+          <Route
+            key={1}
+            exact={true}
+            path={`/explore`}
+            render={(props) => <ExploreProduct {...props} />}
+          />
+          <Route
+            key={1}
+            exact={true}
+            path={`/`}
+            render={(props) => <Home {...props} />}
+          />
+          <Route
+            key={1}
+            exact={true}
+            path={`/search`}
+            render={(props) => <Search {...props} />}
           />
         </Switch>
       </Router>
