@@ -1,9 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import ProductDetail from "../view/ProductDetails";
-import AddToCart from "../view/AddToCart"
-import Profile from "../view/Profile"
-import Login from "../view/Login"
+import AddToCart from "../view/AddToCart";
+import Profile from "../view/Profile";
+import Login from "../view/Login";
+import Register from "../view/Register";
 
 function index() {
   return (
@@ -28,11 +29,17 @@ function index() {
             path={`/profile`}
             render={(props) => <Profile {...props} />}
           />
-           <Route
+          <Route
             key={1}
             exact={true}
             path={`/login`}
             render={(props) => <Login {...props} />}
+          />
+          <Route
+            key={1}
+            exact={true}
+            path={`/register`}
+            render={(props) => <Register {...props} />}
           />
         </Switch>
       </Router>
