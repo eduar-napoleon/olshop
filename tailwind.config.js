@@ -30,6 +30,10 @@ module.exports = {
     borderRadius: {
       "explore": "30px",
       "xl": "0.75rem"
+    },
+    minWidth: {
+      "lg": "17.5rem",
+      "sm": "9.6rem"
     }
   },
   variants: {

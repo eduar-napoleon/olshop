@@ -59,7 +59,10 @@ function ProductDetails() {
       source: image,
     },
     {
-      source: picture2,
+      source: image,
+    },
+    {
+      source: image,
     },
   ];
   const data = [
@@ -148,15 +151,15 @@ function ProductDetails() {
               <Tab.Panels>
                 <Tab.Panel>
                   <section>
-                    <div className="rounded-lg my-5 flex">
+                    <div className="rounded-lg my-5 flex flex-grow gap-x-4 relative overflow-auto">
                       {img.map((col, idx) => {
                         return (
                           <>
-                            <div className="flex flex-row gap-x-2">
+                            <div className="flex flex-row gap-x-2 bg-emc-brokenWhite rounded-xl py-5 min-w-lg">
                               <img
                                 src={col.source}
                                 alt=""
-                                className="rounded-2 w-[280px] h-[390px]"
+                                className="rounded-2"
                               />
                             </div>
                           </>
@@ -202,7 +205,7 @@ function ProductDetails() {
                         {cards.map((col, idx) => {
                           return (
                             <div
-                              className="bg-emc-white flex justify-center items-center w-32 h-60 flex-col gap-y-3 my-3 mx-2 rounded-xl"
+                              className="bg-emc-white flex justify-center items-center w-32 h-60 flex-col gap-y-3 my-3 mx-2 rounded-xl min-w-sm"
                               key={idx}
                             >
                               <img
