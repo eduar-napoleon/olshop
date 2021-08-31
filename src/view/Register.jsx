@@ -4,6 +4,7 @@ import lock from "../assets/svg/lock.svg";
 import apple from "../assets/svg/Apple Auth.svg";
 import facebook from "../assets/svg/Facebook Auth.svg";
 import google from "../assets/svg/Google Auth.svg";
+import { Link } from "react-router-dom";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -61,7 +62,9 @@ function Register() {
           </div>
           <p className="text-center text-emc-white">
             If you have an account?{" "}
-            <span className="text-emc-green">Sign In here</span>
+            <Link to="/login">
+              <span className="text-emc-green">Sign In here</span>
+            </Link>
           </p>
         </section>
       </div>

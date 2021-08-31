@@ -8,7 +8,7 @@ function Profile() {
     <div className="container bg-emc-white">
       <section className="my-3">
         <div className="flex flex-row my-3 gap-x-24">
-          <Link to="/product-detail">
+          <Link to="/">
             <img src={back} alt="" />
           </Link>
 

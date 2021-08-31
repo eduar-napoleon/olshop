@@ -7,6 +7,7 @@ import close from "../assets/svg/close.svg";
 import Earphone from "../assets/svg/headset.svg";
 import clock from "../assets/svg/clock.svg";
 import dots from "../assets/svg/dots.svg";
+import { Link } from "react-router-dom";
 
 function Search() {
   const data = [
@@ -35,7 +36,9 @@ function Search() {
     <div className="container">
       <section>
         <div className="flex flex-row justify-between my-5 container">
-          <img src={back} alt="" />
+          <Link to="/">
+            <img src={back} alt="" />
+          </Link>
           <p className="font-bold">Search</p>
           <img src={cart} alt="" />
         </div>

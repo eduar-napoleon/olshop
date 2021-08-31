@@ -123,8 +123,12 @@ function ProductDetails() {
     <div className="container bg-emc-white py-3">
       <section>
         <div className="flex flex-row justify-between my-3">
-          <img src={back} alt="" />
-          <img src={cart} alt="" />
+          <Link to="/">
+            <img src={back} alt="" />
+          </Link>
+          <Link to="/add-to-cart">
+            <img src={cart} alt="" />
+          </Link>
         </div>
       </section>
       <section>
@@ -151,7 +155,6 @@ function ProductDetails() {
                         images={images}
                         showNavs={true}
                         bgColor={"#F6F6F6"}
-                        
                       />
                     </div>
 
@@ -168,7 +171,10 @@ function ProductDetails() {
                         return (
                           <div className="flex flex-col">
                             <div className="grid grid-cols-4 gap-x-5 phone:gap-x-2 my-2">
+                              <Link to="/profile">
                               <img src={picture} alt="" className="h-16 w-16" />
+
+                              </Link>
                               <div className="d-flex flex-column col-span-2 gap-y-2">
                                 <p>{items.name}</p>
                                 <div>{__renderReviewStars(items.stars)}</div>

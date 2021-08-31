@@ -1,19 +1,19 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import background from "../assets/svg/background.svg";
 import email from "../assets/svg/email.svg";
 import lock from "../assets/svg/lock.svg";
 
 function Login() {
-  const [username, setUsername] = useState("")
-  const [pass, setPass] = useState("")
+  const [username, setUsername] = useState("");
+  const [pass, setPass] = useState("");
   const validate = () => {
-    return username.length > 0 && pass.length > 0
-  }
+    return username.length > 0 && pass.length > 0;
+  };
   const handleSubmit = (e) => {
-    e.preventDefault()
-    window.location.href = ("/")
-
-  }
+    e.preventDefault();
+    window.location.href = "/";
+  };
   return (
     <div className="w-full h-full bg-hero-lg bg-cover">
       <section className="justify-center flex py-20">
@@ -43,13 +43,19 @@ function Login() {
           </div>
           <section className="flex flex-col gap-y-3 pb-16 pt-10">
             <div className="flex justify-center">
-              <button className="bg-emc-green rounded-xl text-center w-11/12 py-2 text-white font-bold" type="submit" disabled={!validate()}>
+              <button
+                className="bg-emc-green rounded-xl text-center w-11/12 py-2 text-white font-bold"
+                type="submit"
+                disabled={!validate()}
+              >
                 Sign In
               </button>
             </div>
             <p className="text-center text-emc-white">
               Didn’t have any account?{" "}
-              <span className="text-emc-green">Sign Up here</span>
+              <Link to="/register">
+                <span className="text-emc-green">Sign Up here</span>
+              </Link>
             </p>
           </section>
         </form>
