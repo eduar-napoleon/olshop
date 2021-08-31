@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/static/css/main.a0397f30.chunk.css",
-    "main.js": "/static/js/main.1f4d6db9.chunk.js",
-    "main.js.map": "/static/js/main.1f4d6db9.chunk.js.map",
+    "main.js": "/static/js/main.62d44f0e.chunk.js",
+    "main.js.map": "/static/js/main.62d44f0e.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.820c1a08.js",
     "runtime-main.js.map": "/static/js/runtime-main.820c1a08.js.map",
     "static/css/2.cb874219.chunk.css": "/static/css/2.cb874219.chunk.css",
-    "static/js/2.cd3b2c1d.chunk.js": "/static/js/2.cd3b2c1d.chunk.js",
-    "static/js/2.cd3b2c1d.chunk.js.map": "/static/js/2.cd3b2c1d.chunk.js.map",
+    "static/js/2.4b566991.chunk.js": "/static/js/2.4b566991.chunk.js",
+    "static/js/2.4b566991.chunk.js.map": "/static/js/2.4b566991.chunk.js.map",
     "static/js/3.a91e71bf.chunk.js": "/static/js/3.a91e71bf.chunk.js",
     "static/js/3.a91e71bf.chunk.js.map": "/static/js/3.a91e71bf.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.cb874219.chunk.css.map": "/static/css/2.cb874219.chunk.css.map",
     "static/css/main.a0397f30.chunk.css.map": "/static/css/main.a0397f30.chunk.css.map",
-    "static/js/2.cd3b2c1d.chunk.js.LICENSE.txt": "/static/js/2.cd3b2c1d.chunk.js.LICENSE.txt",
+    "static/js/2.4b566991.chunk.js.LICENSE.txt": "/static/js/2.4b566991.chunk.js.LICENSE.txt",
     "static/media/Apple Auth.4e218c24.svg": "/static/media/Apple Auth.4e218c24.svg",
     "static/media/Facebook Auth.96283484.svg": "/static/media/Facebook Auth.96283484.svg",
     "static/media/Google Auth.d6982a2b.svg": "/static/media/Google Auth.d6982a2b.svg",
@@ -49,8 +49,8 @@
   "entrypoints": [
     "static/js/runtime-main.820c1a08.js",
     "static/css/2.cb874219.chunk.css",
-    "static/js/2.cd3b2c1d.chunk.js",
+    "static/js/2.4b566991.chunk.js",
     "static/css/main.a0397f30.chunk.css",
-    "static/js/main.1f4d6db9.chunk.js"
+    "static/js/main.62d44f0e.chunk.js"
   ]
 }
