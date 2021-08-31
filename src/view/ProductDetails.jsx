@@ -11,20 +11,20 @@ import wirelss from "..//assets/svg/wireless.svg";
 import buds from "../assets/svg/buds.svg";
 import { Tab } from "@headlessui/react";
 import { Link } from "react-router-dom";
+import SimpleImageSlider from "react-simple-image-slider";
+import earphone from "../assets/image/image6.png";
 
 function ProductDetails() {
   const feature = [
     {
       photo: buds,
       title: "ULTRA SOFT WITH ALCANTARA",
-      desc:
-        "Alcantara® is a highly innovative material offering an unrivalled combination of",
+      desc: "Alcantara® is a highly innovative material offering an unrivalled combination of",
     },
     {
       photo: wirelss,
       title: "APTX HD WIRELESS AUDIO",
-      desc:
-        "The Aptx® HD codec transmits 24-bit hi-res audio, equal to or better than CD quality.",
+      desc: "The Aptx® HD codec transmits 24-bit hi-res audio, equal to or better than CD quality.",
     },
   ];
   const cards = [
@@ -54,17 +54,8 @@ function ProductDetails() {
       price: "USD 350",
     },
   ];
-  const img = [
-    {
-      source: image,
-    },
-    {
-      source: image,
-    },
-    {
-      source: image,
-    },
-  ];
+  const images = [{ url: earphone }, { url: earphone }, { url: earphone }];
+
   const data = [
     {
       name: "Madelina",
@@ -151,21 +142,21 @@ function ProductDetails() {
               <Tab.Panels>
                 <Tab.Panel>
                   <section>
-                    <div className="rounded-lg my-5 flex flex-grow gap-x-4 relative overflow-auto">
-                      {img.map((col, idx) => {
-                        return (
-                          <>
-                            <div className="flex flex-row gap-x-2 bg-emc-brokenWhite rounded-xl py-5 min-w-lg">
-                              <img
-                                src={col.source}
-                                alt=""
-                                className="rounded-2"
-                              />
-                            </div>
-                          </>
-                        );
-                      })}
+                    {/* <div className="rounded-lg my-5 flex flex-grow gap-x-4 relative overflow-auto"> */}
+                    {/* <div className="flex flex-row gap-x-2 bg-emc-brokenWhite rounded-xl py-5 min-w-lg"> */}
+                    <div className="flex justify-center items-center my-3 rounded-lg bg-emc-brokenWhite">
+                      <SimpleImageSlider
+                        width={305}
+                        height={391}
+                        images={images}
+                        showNavs={true}
+                        bgColor={"#F6F6F6"}
+                        
+                      />
                     </div>
+
+                    {/* </div> */}
+                    {/* </div> */}
                   </section>
                   <section>
                     <div className="d-flex flex-column">

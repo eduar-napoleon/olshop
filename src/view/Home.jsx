@@ -83,14 +83,14 @@ function Home() {
                 <p className="text-emc-gray mr-3">See All</p>
               </div>
 
-              <div className="flex justify-center flex-row gap-x-3 relative overflow-auto">
+              <div className="flex flex-row gap-x-3 relative overflow-auto">
                 {data.map((col, idx) => {
                   return (
-                    <div className="flex flex-col bg-emc-white container my-3 w-full rounded-xl">
+                    <div className="flex flex-col bg-emc-white container my-3 w-full rounded-xl min-w-sm gap-y-3">
                       <img src={col.img} alt="" className="py-2 w-full"/>
                       <div className="mt-1">
-                        <p>{col.title}</p>
-                        <span>{col.price}</span>
+                        <p className="text-sm whitespace-nowrap">{col.title}</p>
+                        <span className="text-sm font-bold">{col.price}</span>
                       </div>
                     </div>
                   );

@@ -4,10 +4,6 @@ import { Dialog, Transition } from "@headlessui/react";
 
 const ModalWrapper = ({ children, isOpen, onClose, maxHeight, sm, md, lg, wrapperClass = "", ...props }) => {
 
-    // const size = () => {
-
-    // }
-
     return (
         <Transition
             show={isOpen}
