@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import background from "../assets/svg/background.svg";
 import email from "../assets/svg/email.svg";
 import lock from "../assets/svg/lock.svg";
+import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { loginUser, userSelector } from "../store/features/auth/registerSlice";
+import { regisUser } from "../store/features/auth/registerSlice";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [pass, setPass] = useState("");
-  const validate = () => {
-    return username.length > 0 && pass.length > 0;
+  const dispatch = useDispatch();
+  const { register, errors, handleSubmit } = useForm();
+  const history = useHistory();
+  const onSubmit = (data) => {
+    dispatch(loginUser(data));
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    window.location.href = "/";
-  };
+  useEffect(() => {
+    return () => {
+      dispatch(regisUser());
+    };
+  }, []);
+
   return (
     <div className="w-full h-full bg-hero-lg bg-cover">
       <section className="justify-center flex py-20">
@@ -23,13 +31,19 @@ function Login() {
         </div>
       </section>
       <section className="flex flex-col gap-y-3 mt-32">
-        <form className="flex-col flex gap-y-3" onSubmit={handleSubmit}>
+        <form
+          className="flex-col flex gap-y-3"
+          onSubmit={handleSubmit(onSubmit)}
+          method="POST"
+        >
           <div className="w-5/6 flex flex-row gap-x-3 bg-emc-white rounded-3 mx-auto">
             <img src={email} alt="" className="mx-2" />
             <input
               className="py-2 pr-6 border-none bg-transparent"
               placeholder="Email"
-              onChange={(e) => setUsername(e.target.value)}
+              {...register("email", { required: true })}
+              autocomplete="email"
+              required
             />
           </div>
           <div className="w-5/6 flex flex-row gap-x-3 bg-emc-white rounded-3 mx-auto">
@@ -38,7 +52,9 @@ function Login() {
               className="py-2 pr-6 border-none bg-transparent"
               placeholder="Password"
               type="password"
-              onChange={(e) => setPass(e.target.value)}
+              {...register("password", { required: true })}
+              autocomplete="password"
+              required
             />
           </div>
           <section className="flex flex-col gap-y-3 pb-16 pt-10">
@@ -46,7 +62,7 @@ function Login() {
               <button
                 className="bg-emc-green rounded-xl text-center w-11/12 py-2 text-white font-bold"
                 type="submit"
-                disabled={!validate()}
+                // disabled={!validate()}
               >
                 Sign In
               </button>

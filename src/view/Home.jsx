@@ -79,7 +79,7 @@ function Home() {
                 <a href="" className="text-emc-green ml-4 mb-2 ">
                   Shop Now
                 </a>
-                <img clasName="ml-4 mb-3" src={right} alt="" />
+                <img className="ml-4 mb-3" src={right} alt="" />
               </div>
             </Link>
           </div>

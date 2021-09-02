@@ -1,21 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import email from "../assets/svg/email.svg";
 import lock from "../assets/svg/lock.svg";
 import apple from "../assets/svg/Apple Auth.svg";
 import facebook from "../assets/svg/Facebook Auth.svg";
 import google from "../assets/svg/Google Auth.svg";
 import { Link } from "react-router-dom";
+import Axios from "../utils/AxiosWrapper";
+import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import {
+  registerUser,
+  userSelector,
+} from "../store/features/auth/registerSlice";
+import { regisUser } from "../store/features/auth/registerSlice";
 
 function Register() {
-  const [username, setUsername] = useState("");
-  const [pass, setPass] = useState("");
-  const validate = () => {
-    return username.length > 0 && pass.length > 0;
+  const dispatch = useDispatch();
+  const { register, errors, handleSubmit } = useForm();
+  const history = useHistory();
+
+  // const {isSuccess, isError, errorMessage } =
+  //   useSelector(userSelector);
+  const onSubmit = (data) => {
+    dispatch(registerUser(data));
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    window.location.href = "/";
-  };
+
+  useEffect(() => {
+    return () => {
+      dispatch(regisUser());
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     dispatch(regisUser());
+  //     history.push("/");
+  //   }
+
+  //   if (isError) {
+  //     console.error(errorMessage);
+  //     dispatch(regisUser());
+  //   }
+  // }, [isSuccess, isError]);
   return (
     <div>
       <div className="w-full h-full bg-hero-lg bg-cover">
@@ -26,13 +53,19 @@ function Register() {
           </div>
         </section>
         <section className="flex flex-col gap-y-3 mt-16">
-          <form className="flex-col flex gap-y-3" onSubmit={handleSubmit}>
+          <form
+            className="flex-col flex gap-y-3"
+            onSubmit={handleSubmit(onSubmit)}
+            method="POST"
+          >
             <div className="w-5/6 flex flex-row gap-x-3 bg-emc-white rounded-3 mx-auto">
               <img src={email} alt="" className="mx-2" />
               <input
                 className="py-2 pr-6 border-none bg-transparent"
                 placeholder="Email"
-                onChange={(e) => setUsername(e.target.value)}
+                {...register("email", { required: true })}
+                autocomplete="email"
+                required
               />
             </div>
             <div className="w-5/6 flex flex-row gap-x-3 bg-emc-white rounded-3 mx-auto">
@@ -41,7 +74,9 @@ function Register() {
                 className="py-2 pr-6 border-none bg-transparent"
                 placeholder="Password"
                 type="password"
-                onChange={(e) => setPass(e.target.value)}
+                {...register("password", { required: true })}
+                autocomplete="password"
+                required
               />
             </div>
             <div className="flex justify-center">

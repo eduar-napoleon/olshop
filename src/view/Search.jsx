@@ -40,7 +40,9 @@ function Search() {
             <img src={back} alt="" />
           </Link>
           <p className="font-bold">Search</p>
-          <img src={cart} alt="" />
+          <Link to="/add-to-cart">
+            <img src={cart} alt="" />
+          </Link>
         </div>
       </section>
       <section className="flex mt-3 mx-auto ml-3">
