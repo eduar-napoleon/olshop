@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import menu from "../assets/svg/menu.svg";
 import logo from "../assets/svg/logo.svg";
 import right from "../assets/svg/arrow right.svg";
@@ -7,8 +7,22 @@ import picture from "../assets/svg/picture.svg";
 import search from "../assets/svg/search.svg";
 import Earphone from "../assets/svg/headset.svg";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  allProductsSelector,
+  allProduct,
+} from "../store/features/product/fetchProduct";
 
 function Home() {
+  const dispatch = useDispatch();
+  const { products } = useSelector(allProductsSelector);
+  console.log(products, "cek product");
+
+  useEffect(() => {
+    dispatch(allProduct());
+  }, [allProduct]);
+
+  
   const data = [
     {
       img: Earphone,
@@ -26,6 +40,7 @@ function Home() {
       price: "USD 25",
     },
   ];
+
   return (
     <div className="container mx-auto">
       <nav className="flex items- center justify-between my-3 container">

@@ -140,4 +140,4 @@ export const regisSlice = createSlice({
 
 
 export const { regisUser } = regisSlice.actions;
-export const userSelector = (state) => state.user;
+export const userSelector = (state) => state.regis;
