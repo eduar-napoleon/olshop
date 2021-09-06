@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import menu from "../assets/svg/menu.svg";
 import logo from "../assets/svg/logo.svg";
 import right from "../assets/svg/arrow right.svg";
@@ -7,6 +7,7 @@ import picture from "../assets/svg/picture.svg";
 import search from "../assets/svg/search.svg";
 import Earphone from "../assets/svg/headset.svg";
 import { Link } from "react-router-dom";
+import Axios from "../utils/AxiosWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import {
   allProductsSelector,
@@ -16,30 +17,10 @@ import {
 function Home() {
   const dispatch = useDispatch();
   const { products } = useSelector(allProductsSelector);
-  console.log(products, "cek product");
-
+  console.log(products);
   useEffect(() => {
     dispatch(allProduct());
-  }, [allProduct]);
-
-  
-  const data = [
-    {
-      img: Earphone,
-      title: "TMA-2 HD Wireless",
-      price: "USD 350",
-    },
-    {
-      img: wire,
-      title: "C02 - Cable",
-      price: "USD 25",
-    },
-    {
-      img: wire,
-      title: "C02 - Cable",
-      price: "USD 25",
-    },
-  ];
+  }, [dispatch]);
 
   return (
     <div className="container mx-auto">
@@ -83,12 +64,12 @@ function Home() {
             </button>
           </div>
           <div className="mx-3 flex-wrap bg-emc-white rounded-lg mt-3">
-            <Link to="/product-detail">
+            <Link to="product-detail/">
               <div className="flex flex-row mx-5">
                 <p className="text-3xl font-bold flex flex-col mt-4 mb-4">
                   TMA-2 Modular Headphone{" "}
                 </p>
-                <img src={Earphone} alt="" />
+                <img src={Earphone} alt="" className="phone:w-32" />
               </div>
               <div className="flex items-center mx-3">
                 <a href="" className="text-emc-green ml-4 mb-2 ">
@@ -107,16 +88,22 @@ function Home() {
               </div>
 
               <div className="flex flex-row gap-x-3 relative overflow-auto">
-                {data.map((col, idx) => {
+                {products.map((col, idx) => {
                   return (
-                    <Link to="/product-detail">
+                    <Link to={`/product-detail/${col.id}`}>
                       <div className="flex flex-col bg-emc-white container my-3 w-full rounded-xl min-w-sm gap-y-3">
-                        <img src={col.img} alt="" className="py-2 w-full" />
+                        <img
+                          src={col.cover.media.url}
+                          alt=""
+                          className="py-2 w-32 h-32 flex justify-center items-center"
+                        />
                         <div className="mt-1">
                           <p className="text-sm whitespace-nowrap">
-                            {col.title}
+                            {col.translated.name}
                           </p>
-                          <span className="text-sm font-bold">{col.price}</span>
+                          <span className="text-sm font-bold">
+                            {col.calculatedCheapestPrice.unitPrice}
+                          </span>
                         </div>
                       </div>
                     </Link>

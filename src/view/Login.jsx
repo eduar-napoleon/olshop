@@ -6,13 +6,14 @@ import lock from "../assets/svg/lock.svg";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { loginUser, userSelector } from "../store/features/auth/registerSlice";
+import { loginUser, regisSelector } from "../store/features/auth/registerSlice";
 import { regisUser } from "../store/features/auth/registerSlice";
 
 function Login() {
   const dispatch = useDispatch();
   const { register, errors, handleSubmit } = useForm();
   const history = useHistory();
+  const { isSuccess, isError, errorMessage } = useSelector(regisSelector);
   const onSubmit = (data) => {
     dispatch(loginUser(data));
   };
@@ -21,6 +22,17 @@ function Login() {
       dispatch(regisUser());
     };
   }, []);
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(regisUser());
+      history.push("/");
+    }
+
+    if (isError) {
+      console.error(errorMessage);
+      dispatch(regisUser());
+    }
+  }, [isSuccess, isError]);
 
   return (
     <div className="w-full h-full bg-hero-lg bg-cover">

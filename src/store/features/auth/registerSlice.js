@@ -36,12 +36,13 @@ export const registerUser = createAsyncThunk(
     const response = await Axios.post("/account/register", body, config)
       .then((res) => {
         console.log(res);
+        // window.location.href = ("/")
       })
       .catch((err) => {
         console.log(err);
       });
     if (response.status === 200) {
-      window.location.href = "/";
+      // window.location.href = "/";
     }
   }
 );
@@ -64,10 +65,14 @@ export const loginUser = createAsyncThunk(
     const loginres = await Axios.post("/account/login", body, config)
       .then((res) => {
         console.log(res);
+        // window.location.href = ("/")
       })
       .catch((err) => {
         console.log(err);
       });
+      // if (loginres.status === 200) {
+      //   window.location.href = ("/");
+      // }
   }
 );
 
@@ -112,6 +117,7 @@ export const regisSlice = createSlice({
       state.isFetching = false;
       state.isSuccess = true;
       state.email = action.payload;
+      state.password = action.payload
     },
     [registerUser.pending]: (state) => {
       state.isFetching = true;
@@ -140,4 +146,4 @@ export const regisSlice = createSlice({
 
 
 export const { regisUser } = regisSlice.actions;
-export const userSelector = (state) => state.regis;
+export const regisSelector = (state) => state.regis;

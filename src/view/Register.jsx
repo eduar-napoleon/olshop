@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import {
   registerUser,
-  userSelector,
+  regisSelector,
 } from "../store/features/auth/registerSlice";
 import { regisUser } from "../store/features/auth/registerSlice";
 
@@ -20,8 +20,7 @@ function Register() {
   const { register, errors, handleSubmit } = useForm();
   const history = useHistory();
 
-  // const {isSuccess, isError, errorMessage } =
-  //   useSelector(userSelector);
+  const { isSuccess, isError, errorMessage } = useSelector(regisSelector);
   const onSubmit = (data) => {
     dispatch(registerUser(data));
   };
@@ -32,17 +31,18 @@ function Register() {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (isSuccess) {
-  //     dispatch(regisUser());
-  //     history.push("/");
-  //   }
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(regisUser());
+      history.push("/");
+    }
 
-  //   if (isError) {
-  //     console.error(errorMessage);
-  //     dispatch(regisUser());
-  //   }
-  // }, [isSuccess, isError]);
+    if (isError) {
+      console.error(errorMessage);
+      dispatch(regisUser());
+    }
+  }, [isSuccess, isError]);
+
   return (
     <div>
       <div className="w-full h-full bg-hero-lg bg-cover">
@@ -64,7 +64,7 @@ function Register() {
                 className="py-2 pr-6 border-none bg-transparent"
                 placeholder="Email"
                 {...register("email", { required: true })}
-                autocomplete="email"
+                autoComplete="email"
                 required
               />
             </div>
@@ -75,7 +75,7 @@ function Register() {
                 placeholder="Password"
                 type="password"
                 {...register("password", { required: true })}
-                autocomplete="password"
+                autoComplete="password"
                 required
               />
             </div>

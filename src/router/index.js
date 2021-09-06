@@ -18,7 +18,7 @@ function index() {
           <Route
             key={1}
             exact={true}
-            path={`/product-detail`}
+            path={`/product-detail/:id`}
             render={(props) => <ProductDetail {...props} />}
           />
           <Route
