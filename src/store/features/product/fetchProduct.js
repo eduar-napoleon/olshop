@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Axios from "../../../utils/AxiosWrapper";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 
 
 export const allProduct = createAsyncThunk(
@@ -19,7 +19,7 @@ export const allProduct = createAsyncThunk(
         },
       };
       const response = await Axios.post("/product", body, config);
-      localStorage.setItem("id", response.data.elements[0].id)
+    //   localStorage.setItem("id", response.data.elements[0].id)
       return response.data.elements;
     } catch (err) {
       if (!err.response) {
@@ -30,14 +30,12 @@ export const allProduct = createAsyncThunk(
   }
 );
 const idProduct = localStorage.getItem("id")
+// const {id} = useSelector(state => state.products.find(item => item.id === idProduct))
+// const { id } = useParams();
 export const fetchProductId = createAsyncThunk(
   "productId",
   async (payload, { dispatch, rejectWithValue }) => {
     try {
-      const body = {
-        page: 1,
-        limit: 50,
-      };
       const config = {
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +43,7 @@ export const fetchProductId = createAsyncThunk(
           "sw-context-token": "SWSCRNHTCEHIWKH5VJB4EJBZSG",
         },
       };
-      const response = await Axios.post((`/product/${idProduct}`), body, config);
+      const response = await Axios.post((`/product/`), config);
       return response.data.elements.extensions.id;
     } catch (err) {
       if (!err.response) {
@@ -65,20 +63,13 @@ export const allProductSlice = createSlice({
     isError: false,
     productId: "",
   },
-  reducers: {
-    // allProducts: (state) => {
-    //   state.isError = false;
-    //   state.isSuccess = false;
-    //   state.isFetching = false;
-    //   return state;
-    // },
-  },
+  reducers: {},
   extraReducers: {
     [allProduct.fulfilled]: (state, { payload }) => {
       state.isFetching = false;
       state.isSuccess = true;
       state.products = payload;
-      state.productId = payload
+      
     },
     [allProduct.pending]: (state) => {
       state.isFetching = true;
@@ -88,8 +79,23 @@ export const allProductSlice = createSlice({
       state.isError = true;
       state.errorMessage = action.payload;
     },
+    [fetchProductId.fulfilled]: (state, {payload}) => {
+        state.isFetching = false;
+        state.isSuccess = true;
+        state.productId = payload;
+    },
+    [fetchProductId.pending]: (state) => {
+        state.isFetching = true;
+    },
+    [fetchProductId.rejected]: (state, action) => {
+        state.isFetching = false;
+        state.isError = true;
+        state.errorMessage = action.payload
+    }
   },
 });
+
+
 
 export const { allProducts } = allProductSlice.actions;
 export const allProductsSelector = (state) => state.products;

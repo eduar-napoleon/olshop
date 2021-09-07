@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import back from "../assets/svg/back.svg";
 import cart from "../assets/svg/chart.svg";
 import image from "../assets/svg/headset.svg";
@@ -13,8 +13,76 @@ import { Tab } from "@headlessui/react";
 import { Link } from "react-router-dom";
 import SimpleImageSlider from "react-simple-image-slider";
 import earphone from "../assets/image/image6.png";
+import { useParams } from "react-router-dom";
+import Axios from "../utils/AxiosWrapper";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  allProductsSelector,
+  allProduct,
+} from "../store/features/product/fetchProduct";
 
-function ProductDetails() {
+function ProductDetails(props) {
+  const { id } = useParams();
+  const [product, setProduct] = useState({
+    productData: [],
+  });
+  const [price, setPrice] = useState(0);
+  const [reviews, setReviews] = useState([]);
+  const [imgProduct, setImgProduct] = useState("");
+  const dispatch = useDispatch();
+  const { products } = useSelector(allProductsSelector);
+  useEffect(() => {
+    dispatch(allProduct());
+  }, [dispatch]);
+
+  const getProductDetail = () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "sw-access-key": "SWSCRNHTCEHIWKH5VJB4EJBZSG",
+      },
+    };
+    Axios.post(`/product/${id}`, {}, config)
+      .then((res) => {
+        console.log(res);
+        setProduct({
+          productData: res.data.product,
+        });
+        setPrice(res.data.product.calculatedCheapestPrice.unitPrice);
+        setImgProduct(res.data.product.cover.media.url);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getProductDetail();
+  }, []);
+
+  const { productData } = product;
+  const { name } = productData;
+
+  const getReview = () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "sw-access-key": "SWSCRNHTCEHIWKH5VJB4EJBZSG",
+      },
+    };
+    Axios.post(`/product/${id}/reviews`, {}, config)
+      .then((res) => {
+        console.log(res);
+        setReviews(res.data.elements);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    getReview();
+  }, []);
+
   const feature = [
     {
       photo: buds,
@@ -25,33 +93,6 @@ function ProductDetails() {
       photo: wirelss,
       title: "APTX HD WIRELESS AUDIO",
       desc: "The Aptx® HD codec transmits 24-bit hi-res audio, equal to or better than CD quality.",
-    },
-  ];
-  const cards = [
-    {
-      items: wire,
-      name: "C02 - Cable",
-      price: "USD 25",
-    },
-    {
-      items: image,
-      name: "TMA-2 HD Wireless",
-      price: "USD 350",
-    },
-    {
-      items: wire,
-      name: "C02 - Cable",
-      price: "USD 25",
-    },
-    {
-      items: image,
-      name: "TMA-2 HD Wireless",
-      price: "USD 350",
-    },
-    {
-      items: image,
-      name: "TMA-2 HD Wireless",
-      price: "USD 350",
     },
   ];
   const images = [{ url: earphone }, { url: earphone }, { url: earphone }];
@@ -133,8 +174,8 @@ function ProductDetails() {
       </section>
       <section>
         <div className="flex flex-column gap-y-5">
-          <p className="text-emc-green font-bold">USD 350</p>
-          <p className="font-bold text-5xl">TMA-2 HD WIRELESS</p>
+          <p className="text-emc-green font-bold text-xl">{price}</p>
+          <p className="font-bold text-5xl">{name}</p>
 
           <div>
             <Tab.Group>
@@ -164,29 +205,38 @@ function ProductDetails() {
                   <section>
                     <div className="d-flex flex-column">
                       <p className="my-5">
-                        Review <span>()</span>
+                        Review <span>({reviews.length})</span>
                       </p>
 
-                      {data.map((items, idx) => {
-                        return (
-                          <div className="flex flex-col">
-                            <div className="grid grid-cols-4 gap-x-5 phone:gap-x-2 my-2">
-                              <Link to="/profile">
-                              <img src={picture} alt="" className="h-16 w-16" />
-
-                              </Link>
-                              <div className="d-flex flex-column col-span-2 gap-y-2">
-                                <p>{items.name}</p>
-                                <div>{__renderReviewStars(items.stars)}</div>
+                      {reviews.length === 0 ? (
+                        <div>
+                          <p>No Review yet</p>
+                        </div>
+                      ) : (
+                        data.map((items, idx) => {
+                          return (
+                            <div className="flex flex-col">
+                              <div className="grid grid-cols-4 gap-x-5 phone:gap-x-2 my-2">
+                                <Link to="/profile">
+                                  <img
+                                    src={picture}
+                                    alt=""
+                                    className="h-16 w-16"
+                                  />
+                                </Link>
+                                <div className="d-flex flex-column col-span-2 gap-y-2">
+                                  <p>{items.name}</p>
+                                  <div>{__renderReviewStars(items.stars)}</div>
+                                </div>
+                                <p className="flex flex-row-reverse text-sm">
+                                  {items.date}
+                                </p>
                               </div>
-                              <p className="flex flex-row-reverse text-sm">
-                                {items.date}
-                              </p>
+                              <p className="my-2 ml-24">{items.review}</p>
                             </div>
-                            <p className="my-2 ml-24">{items.review}</p>
-                          </div>
-                        );
-                      })}
+                          );
+                        })
+                      )}
                       <p className="text-emc-gray text-center my-3">
                         See All Reviews
                       </p>
@@ -199,7 +249,7 @@ function ProductDetails() {
                         <p className="text-emc-gray">See All</p>
                       </div>
                       <div className="flex flex-grow overflow-auto relative ">
-                        {cards.map((col, idx) => {
+                        {products.map((col, idx) => {
                           return (
                             <div
                               className="bg-emc-white flex justify-center items-center w-32 h-60 flex-col gap-y-3 my-3 mx-2 rounded-xl min-w-sm"
@@ -207,13 +257,13 @@ function ProductDetails() {
                             >
                               <img
                                 alt=""
-                                src={col.items}
+                                src={col.cover.media.url}
                                 className="my-3 h-36 w-36"
                               />
                               <p className="text-lg font-bold m-1">
-                                {col.name}
+                                {col.translated.name}
                               </p>
-                              <p>{col.price}</p>
+                              <p>{col.calculatedCheapestPrice.unitPrice}</p>
                             </div>
                           );
                         })}
