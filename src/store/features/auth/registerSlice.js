@@ -41,9 +41,9 @@ export const registerUser = createAsyncThunk(
       .catch((err) => {
         console.log(err);
       });
-    if (response.status === 200) {
-      // window.location.href = "/";
-    }
+    // if (response.status === 200) {
+    //   // window.location.href = "/";
+    // }
   }
 );
 
@@ -117,7 +117,7 @@ export const regisSlice = createSlice({
       state.isFetching = false;
       state.isSuccess = true;
       state.email = action.payload;
-      state.password = action.payload
+      // state.password = action.payload
     },
     [registerUser.pending]: (state) => {
       state.isFetching = true;
