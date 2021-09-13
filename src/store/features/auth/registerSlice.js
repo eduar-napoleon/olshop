@@ -59,12 +59,13 @@ export const loginUser = createAsyncThunk(
       headers: {
         "Content-Type": "application/json",
         "sw-access-key": "SWSCCGQ0QXPBZ0F4CWJIS08WBQ",
-        "sw-context-token": "SWSCCGQ0QXPBZ0F4CWJIS08WBQ",
+        "sw-context-token": "1",
       },
     };
     const loginres = await Axios.post("/account/login", body, config)
       .then((res) => {
         console.log(res);
+        localStorage.setItem("token", res.data.contextToken)
         // window.location.href = ("/")
       })
       .catch((err) => {
@@ -117,7 +118,7 @@ export const regisSlice = createSlice({
       state.isFetching = false;
       state.isSuccess = true;
       state.email = action.payload;
-      // state.password = action.payload
+      state.password = action.payload
     },
     [registerUser.pending]: (state) => {
       state.isFetching = true;

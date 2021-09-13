@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import back from "../assets/svg/back.svg";
 import cart from "../assets/svg/chart.svg";
 import search from "../assets/svg/search.svg";
@@ -8,8 +8,53 @@ import Earphone from "../assets/svg/headset.svg";
 import clock from "../assets/svg/clock.svg";
 import dots from "../assets/svg/dots.svg";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  allProductsSelector,
+  allProduct,
+} from "../store/features/product/fetchProduct";
+import Axios from "../utils/AxiosWrapper";
 
 function Search() {
+  const [searchText, setSearchText] = useState("");
+  const [result, setResult] = useState([]);
+  const [datas, setDatas] = useState([]);
+  const [name, setName] = useState("")
+  const filteredProduct = () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "sw-access-key": "SWSCRNHTCEHIWKH5VJB4EJBZSG",
+      },
+    };
+    const body = {
+      page: 1,
+      limit: 50,
+      filter: [
+        {
+          type: "equals",
+          field: "name",
+          value: searchText,
+        },
+      ],
+    };
+    Axios.post("/product", body, config)
+      .then((res) => {
+        // console.log(res);
+        setDatas(res.data.elements);
+        setName(res.data.elements.name)
+        console.log(datas);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    filteredProduct();
+    setResult(datas);
+  }, [searchText]);
+
   const data = [
     {
       img: Earphone,
@@ -52,6 +97,8 @@ function Search() {
             type="search"
             className="bg-transparent p-1 mt-2 "
             placeholder="Search headphone"
+            onChange={(e) => setSearchText(e.target.value)}
+            value={searchText}
           />
         </div>
       </section>
@@ -77,21 +124,21 @@ function Search() {
       <section className="my-4 container">
         <div className="flex flex-col">
           <p>Popular product</p>
-          {data.map((col, idx) => {
+          {datas.map((col, idx) => {
             return (
               <div
                 className="grid grid-cols-3 rounded-lg gap-x-5 py-3 px-2"
                 key={idx}
               >
                 <img
-                  src={col.img}
+                  src={col.cover.media.url}
                   className="bg-emc-brokenWhite mt-1 w-4/5 rounded-xl"
                   alt=""
                 />
 
                 <div className="flex flex-col gap-y-2 col-span-2">
-                  <p className="whitespace-nowrap">{col.title}</p>
-                  <span className="font-bold">{col.price}</span>
+                  <p className="whitespace-nowrap">{col.translated.name}</p>
+                  <span className="font-bold">{col.calculatedPrice.unitPrice}</span>
                   <div className="flex flex-row gap-x-3 justify-between">
                     <div className="flex flex-row gap-x-2">
                       <img src={star} className="mt-1  " alt="" />

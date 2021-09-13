@@ -1,9 +1,31 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import back from "../assets/svg/back.svg";
 import picture from "../assets/svg/picture.svg";
 import { Link } from "react-router-dom";
+import Axios from "../utils/AxiosWrapper"
 
 function Profile() {
+  const [email, setEmail] = useState({emailData: ""})
+  const token = localStorage.getItem("token")
+  console.log(token, "Cek token");
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      "sw-access-key": "SWSCRNHTCEHIWKH5VJB4EJBZSG",
+      "sw-context-token": "gGQ7DxxaAiBFg7rPGA9ijIRHomHfrVoV"
+    },
+  }
+  useEffect(() => {
+    Axios.post("/account/customer", {}, config).then((res) => {
+      console.log(res);
+      setEmail({emailData: res.data.email})
+    }).then((err) => {
+      console.log(err);
+    })
+  },[])
+  const {emailData} = email
+  console.log(emailData, "cek email");
+  
   return (
     <div className="container bg-emc-white">
       <section className="my-3">
@@ -20,7 +42,7 @@ function Profile() {
           <img src={picture} alt="" className="h-14 w-14" />
           <div className="flex flex-col gap-y-1">
             <p>Andrea Hirata</p>
-            <p className="text-emc-gray text-sm">hirata@gmail.com</p>
+            <p className="text-emc-gray text-sm">{emailData}</p>
           </div>
         </div>
       </section>
