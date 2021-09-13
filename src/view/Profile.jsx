@@ -12,7 +12,7 @@ function Profile() {
     headers: {
       "Content-Type": "application/json",
       "sw-access-key": "SWSCRNHTCEHIWKH5VJB4EJBZSG",
-      "sw-context-token": "gGQ7DxxaAiBFg7rPGA9ijIRHomHfrVoV"
+      "sw-context-token": "pc9oYPGuQnbTzBi1ePTRhGW4OgQ1w4Gc"
     },
   }
   useEffect(() => {

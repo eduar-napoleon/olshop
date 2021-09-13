@@ -51,8 +51,8 @@ export const loginUser = createAsyncThunk(
   "user/login",
   async ({ email, password }, thunkAPI) => {
     const body = {
-      email,
-      password,
+      username: email,
+      password: password,
     };
 
     const config = {
@@ -65,7 +65,7 @@ export const loginUser = createAsyncThunk(
     const loginres = await Axios.post("/account/login", body, config)
       .then((res) => {
         console.log(res);
-        localStorage.setItem("token", res.data.contextToken)
+        // localStorage.setItem("token", res.data.contextToken)
         // window.location.href = ("/")
       })
       .catch((err) => {
