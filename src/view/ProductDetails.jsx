@@ -28,6 +28,7 @@ function ProductDetails(props) {
   });
   const [price, setPrice] = useState(0);
   const [reviews, setReviews] = useState([]);
+  const [ desc, setDesc] = useState("")
   const [imgProduct, setImgProduct] = useState("");
   const dispatch = useDispatch();
   const { products } = useSelector(allProductsSelector);
@@ -50,6 +51,7 @@ function ProductDetails(props) {
         });
         setPrice(res.data.product.calculatedCheapestPrice.unitPrice);
         setImgProduct(res.data.product.cover.media.url);
+        setDesc(res.data.product.description)
       })
       .catch((err) => {
         console.log(err);
@@ -82,6 +84,38 @@ function ProductDetails(props) {
   useEffect(() => {
     getReview();
   }, []);
+
+
+  const addToCart = () => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        "sw-access-key": "SWSCRNHTCEHIWKH5VJB4EJBZSG",
+      },
+    };
+    const body = {
+      apiAlias: "string",
+      items: [
+        {
+          id: id,
+          referencedId: id,
+          label: "product",
+          quantity: 1,
+          type: "product",
+          good: true,
+          description: desc,
+          removable: true,
+          stackable: true,
+          modified: true,
+        },
+      ],
+    };
+    Axios.post("checkout/cart/line-item", body, config).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    })
+  };
 
   const feature = [
     {
@@ -314,7 +348,7 @@ function ProductDetails(props) {
           </div>
         </div>
         <Link to="/add-to-cart">
-          <button className="bg-emc-green rounded-xl text-center w-11/12 py-2 text-white font-bold fixed bottom-5">
+          <button className="bg-emc-green rounded-xl text-center w-11/12 py-2 text-white font-bold fixed bottom-5" onClick={addToCart}>
             Add To Cart
           </button>
         </Link>
